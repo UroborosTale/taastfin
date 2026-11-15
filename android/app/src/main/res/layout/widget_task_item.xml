@@ -9,6 +9,6 @@
     android:paddingTop="8dp"
     android:paddingBottom="8dp">
 
-    <TextView android:id="@+id/widget_task_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:ellipsize="end" android:maxLines="1" android:text="Подготовить презентацию" android:textColor="@color/widget_text" android:textSize="13sp" android:textStyle="bold" />
-    <TextView android:id="@+id/widget_task_details" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:text="12:00 · Работа" android:textColor="@color/widget_muted" android:textSize="10sp" />
+    <TextView android:id="@+id/widget_task_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:ellipsize="end" android:maxLines="1" android:text="Задач пока нет" android:textColor="@color/widget_text" android:textSize="13sp" android:textStyle="bold" />
+    <TextView android:id="@+id/widget_task_details" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:text="Нажмите, чтобы открыть Планер" android:textColor="@color/widget_muted" android:textSize="10sp" />
 </LinearLayout>

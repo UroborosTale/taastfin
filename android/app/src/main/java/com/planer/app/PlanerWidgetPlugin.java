@@ -17,6 +17,7 @@ public class PlanerWidgetPlugin extends Plugin {
         preferences.edit()
             .putFloat("daySpent", call.getDouble("daySpent", 0.0).floatValue())
             .putFloat("dayLimit", call.getDouble("dayLimit", 0.0).floatValue())
+            .putBoolean("limitEnabled", call.getBoolean("limitEnabled", false))
             .putFloat("remaining", call.getDouble("remaining", 0.0).floatValue())
             .putString("dataDate", call.getString("dataDate", ""))
             .putString("tasks", tasks.toString())

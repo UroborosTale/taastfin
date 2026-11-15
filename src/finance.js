@@ -29,6 +29,22 @@ export function spentBetween(expenses, start, end = new Date()) {
   return expenses.filter((item) => item.date >= from && item.date <= to).reduce((sum, item) => sum + Number(item.amount), 0);
 }
 
+export function withoutDemoEntries(entries) {
+  if (!Array.isArray(entries)) return [];
+  return entries.filter((entry) => Number.isInteger(entry?.id) && entry.id > 1000);
+}
+
+export function normalizeLimits(stored) {
+  const suggested = { day: 2500, week: 15000, month: 45000 };
+  return Object.fromEntries(Object.keys(suggested).map((key) => {
+    const value = stored?.[key];
+    const enabled = typeof value === 'object' && value !== null && value.enabled === true;
+    const rawAmount = typeof value === 'object' && value !== null ? value.amount : value;
+    const amount = Number(rawAmount) > 0 ? Number(rawAmount) : suggested[key];
+    return [key, { enabled, amount }];
+  }));
+}
+
 export function getLimitProgress(spent, limit) {
   if (!limit || limit <= 0) return 0;
   return Math.min(100, Math.round((spent / limit) * 100));

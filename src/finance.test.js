@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getCalendarDays, getLimitProgress, getWeekStart, localDate, spentBetween } from './finance.js';
+import { getCalendarDays, getLimitProgress, getWeekStart, localDate, normalizeLimits, spentBetween, withoutDemoEntries } from './finance.js';
 
 describe('finance helpers', () => {
   it('starts weeks on Monday', () => {
@@ -21,5 +21,24 @@ describe('finance helpers', () => {
     expect(days).toHaveLength(42);
     expect(days[0].key).toBe('2026-10-26');
     expect(days.filter((day) => day.inMonth)).toHaveLength(30);
+  });
+
+  it('removes bundled demo entries but preserves user entries', () => {
+    const entries = [{ id: 1, title: 'Демо' }, { id: Date.now(), title: 'Моя запись' }];
+    expect(withoutDemoEntries(entries)).toEqual([entries[1]]);
+    expect(withoutDemoEntries(null)).toEqual([]);
+  });
+
+  it('starts with all limits disabled and migrates old values safely', () => {
+    expect(normalizeLimits(null)).toEqual({
+      day: { enabled: false, amount: 2500 },
+      week: { enabled: false, amount: 15000 },
+      month: { enabled: false, amount: 45000 },
+    });
+    expect(normalizeLimits({ day: 3000, week: { enabled: true, amount: 12000 } })).toEqual({
+      day: { enabled: false, amount: 3000 },
+      week: { enabled: true, amount: 12000 },
+      month: { enabled: false, amount: 45000 },
+    });
   });
 });

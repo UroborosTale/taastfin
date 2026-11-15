@@ -13,10 +13,12 @@ export function syncAndroidWidgets({ expenses, tasks, limits }) {
     .slice(0, 8)
     .map(({ title, time, project }) => ({ title, time, project }));
 
+  const dayLimit = limits.day.enabled ? Number(limits.day.amount) : 0;
   return PlanerWidget.updateWidgetData({
     daySpent,
-    dayLimit: Number(limits.day),
-    remaining: Math.max(0, Number(limits.day) - daySpent),
+    dayLimit,
+    limitEnabled: limits.day.enabled,
+    remaining: Math.max(0, dayLimit - daySpent),
     dataDate: today,
     tasks: widgetTasks,
   }).catch((error) => console.warn('Не удалось обновить Android-виджеты', error));

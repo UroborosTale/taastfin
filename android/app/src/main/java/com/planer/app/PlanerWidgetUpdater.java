@@ -38,12 +38,13 @@ public final class PlanerWidgetUpdater {
         float spent = current ? data.getFloat("daySpent", 0f) : 0f;
         float limit = current ? data.getFloat("dayLimit", 0f) : 0f;
         float remaining = current ? data.getFloat("remaining", 0f) : 0f;
-        int progress = limit > 0 ? Math.min(100, Math.round(spent / limit * 100)) : 0;
+        boolean limitEnabled = current && data.getBoolean("limitEnabled", false);
+        int progress = limitEnabled && limit > 0 ? Math.min(100, Math.round(spent / limit * 100)) : 0;
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_budget);
-        views.setTextViewText(R.id.widget_remaining, limit > 0 ? money(remaining) : "— ₽");
-        views.setTextViewText(R.id.widget_spent, limit > 0
+        views.setTextViewText(R.id.widget_remaining, limitEnabled && limit > 0 ? money(remaining) : "— ₽");
+        views.setTextViewText(R.id.widget_spent, !current ? "Откройте Планер для синхронизации" : limitEnabled
             ? "Потрачено " + money(spent) + " из " + money(limit)
-            : "Откройте Планер для синхронизации");
+            : "Дневной лимит не задан");
         views.setProgressBar(R.id.widget_budget_progress, 100, progress, false);
         views.setOnClickPendingIntent(R.id.widget_budget_root, openApp(context));
         return views;
