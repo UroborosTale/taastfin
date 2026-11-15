@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Планер</string>
+    <string name="title_activity_main">Планер</string>
+    <string name="package_name">com.planer.app</string>
+    <string name="custom_url_scheme">com.planer.app</string>
+    <string name="budget_widget_description">Остаток дневного бюджета и прогресс расходов</string>
+    <string name="tasks_widget_description">Список невыполненных задач на сегодня</string>
+</resources>

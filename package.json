@@ -8,14 +8,19 @@
     "build": "vite build",
     "build:single": "npm run build && node scripts/build-single.mjs",
     "preview": "vite preview --host 0.0.0.0",
+    "android:sync": "npm run build && cap sync android",
+    "android:open": "npm run android:sync && cap open android",
     "test": "vitest run"
   },
   "dependencies": {
+    "@capacitor/android": "^7.6.10",
+    "@capacitor/cli": "^7.6.10",
+    "@capacitor/core": "^7.6.10",
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
+    "lucide-react": "^0.468.0",
     "react": "latest",
     "react-dom": "latest",
-    "lucide-react": "^0.468.0"
+    "vite": "latest"
   },
   "devDependencies": {
     "vitest": "latest"

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#315C48</color>
+    <color name="colorPrimaryDark">#254736</color>
+    <color name="colorAccent">#D8F18D</color>
+    <color name="widget_green">#315C48</color>
+    <color name="widget_text">#28342D</color>
+    <color name="widget_muted">#7F897F</color>
+</resources>

@@ -1,0 +1,9 @@
+{
+  "appId": "com.planer.app",
+  "appName": "Планер",
+  "webDir": "dist",
+  "backgroundColor": "#f6f7f4",
+  "android": {
+    "allowMixedContent": false
+  }
+}

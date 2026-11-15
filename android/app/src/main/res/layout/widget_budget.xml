@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_budget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_budget_background"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:padding="18dp">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+        <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="ПЛАНЕР · СЕГОДНЯ" android:textColor="#D8F18D" android:textSize="10sp" android:textStyle="bold" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ОТКРЫТЬ →" android:textColor="#D5E0D7" android:textSize="9sp" />
+    </LinearLayout>
+    <TextView android:id="@+id/widget_remaining" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="900 ₽" android:textColor="#FFFFFF" android:textSize="29sp" android:textStyle="bold" />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Осталось на сегодня" android:textColor="#D5E0D7" android:textSize="11sp" />
+    <ProgressBar android:id="@+id/widget_budget_progress" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="5dp" android:layout_marginTop="12dp" android:max="100" android:progress="64" android:progressTint="#D8F18D" android:progressBackgroundTint="#557561" />
+    <TextView android:id="@+id/widget_spent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="7dp" android:text="Потрачено 1 600 ₽ из 2 500 ₽" android:textColor="#D5E0D7" android:textSize="10sp" />
+</LinearLayout>

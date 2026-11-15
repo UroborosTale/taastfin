@@ -2,5 +2,10 @@ node_modules/
 dist/
 .pages/
 .chrome/
+.android-sdk/
+.jdk/
+.tooling/
 *.log
+*.apk
+*.keystore
 .DS_Store

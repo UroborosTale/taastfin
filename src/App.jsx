@@ -7,6 +7,7 @@ import {
   Clock3, Menu, ReceiptText, ArrowRight, ListChecks, Shirt, GraduationCap,
 } from 'lucide-react';
 import { getCalendarDays, getLimitProgress, getMonthStart, getWeekStart, localDate, money, monthName, shiftDate, shortDate, spentBetween } from './finance.js';
+import { syncAndroidWidgets } from './widgetSync.js';
 
 const TODAY = localDate();
 const categories = [
@@ -249,6 +250,7 @@ export default function App() {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [toast, setToast] = useState('');
   useEffect(() => { if (toast) { const timer = setTimeout(() => setToast(''), 3000); return () => clearTimeout(timer); } }, [toast]);
+  useEffect(() => { syncAndroidWidgets({ expenses, tasks, limits }); }, [expenses, tasks, limits]);
 
   const navigate = (section) => {
     setSidebarOpen(false);
