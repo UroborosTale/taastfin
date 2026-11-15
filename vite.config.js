@@ -3,5 +3,10 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  server: { host: '0.0.0.0' },
+  server: {
+    host: '0.0.0.0',
+    watch: {
+      ignored: ['**/.tooling/**', '**/.android-sdk/**', '**/.jdk/**', '**/.pages/**', '**/android/**', '**/dist/**'],
+    },
+  },
 });

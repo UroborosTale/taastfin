@@ -8,6 +8,8 @@ import {
 } from 'lucide-react';
 import { getCalendarDays, getLimitProgress, getMonthStart, getWeekStart, localDate, money, monthName, normalizeLimits, shortDate, spentBetween, withoutDemoEntries } from './finance.js';
 import { syncAndroidWidgets } from './widgetSync.js';
+import { CategoryAnalytics, DataTools } from './DataTools.jsx';
+import { mergeEntries } from './dataUtils.js';
 
 const TODAY = localDate();
 const categories = [
@@ -257,6 +259,11 @@ export default function App() {
   const openTask = (date = TODAY) => { setTaskDate(date); setModal('task'); };
   const saveExpense = (expense) => { setExpenses((items) => [expense, ...items]); setModal(null); setToast('Расход успешно добавлен'); };
   const saveTask = (task) => { setTasks((items) => [...items, task]); setSelectedDate(task.date); setModal(null); setToast('Задача добавлена в планер'); };
+  const restoreData = (backup) => {
+    setExpenses((items) => mergeEntries(items, backup.expenses));
+    setTasks((items) => mergeEntries(items, backup.tasks));
+    setLimits((current) => normalizeLimits(backup.limits) || current);
+  };
   const greeting = new Date().getHours() < 12 ? 'Доброе утро' : new Date().getHours() < 18 ? 'Добрый день' : 'Добрый вечер';
   const fullDate = new Intl.DateTimeFormat('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date());
   const undoneToday = tasks.filter((task) => task.date === TODAY && !task.done).length;
@@ -281,6 +288,7 @@ export default function App() {
         <StatCards expenses={expenses} />
         <div className="dashboard-grid"><SpendingChart expenses={expenses} /><LimitsPanel limits={limits} expenses={expenses} onEdit={() => setModal('limits')} /></div>
         <ExpenseList expenses={expenses} onDelete={(id) => { setExpenses((items) => items.filter((item) => item.id !== id)); setToast('Расход удалён'); }} onAdd={() => setModal('expense')} />
+        <div className="finance-tools"><CategoryAnalytics expenses={expenses} categoryMap={categoryMap} /><DataTools expenses={expenses} tasks={tasks} limits={limits} onRestore={restoreData} onNotify={setToast} /></div>
       </>}
       {active === 'tasks' && <div className="tasks-page"><TasksCard tasks={tasks} {...taskActions} /></div>}
       {active === 'calendar' && <div className="calendar-page"><CalendarCard tasks={tasks} expenses={expenses} selectedDate={selectedDate} setSelectedDate={setSelectedDate} onAddTask={openTask} /><DayAgenda tasks={tasks} expenses={expenses} selectedDate={selectedDate} {...taskActions} /></div>}
