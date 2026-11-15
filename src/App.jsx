@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   LayoutDashboard, CheckSquare, WalletCards, CalendarDays, Settings, CircleHelp,
-  Plus, Bell, Search, ArrowUpRight, ArrowDownLeft, MoreHorizontal, ChevronDown,
+  Plus, Bell, Search, ArrowUpRight, ArrowDownLeft,
   ChevronLeft, ChevronRight, ShoppingBag, Coffee, CarFront, House, Utensils,
-  HeartPulse, BriefcaseBusiness, X, Check, Pencil, Trash2, Target, TrendingUp,
-  Clock3, Menu, ReceiptText, ArrowRight, ListChecks, Shirt, GraduationCap,
+  HeartPulse, X, Check, Pencil, Trash2, Target, TrendingUp,
+  Clock3, Menu, ArrowRight, ListChecks, Shirt, GraduationCap,
 } from 'lucide-react';
 import { getCalendarDays, getLimitProgress, getMonthStart, getWeekStart, localDate, money, monthName, shiftDate, shortDate, spentBetween } from './finance.js';
 import { syncAndroidWidgets } from './widgetSync.js';
@@ -143,7 +143,6 @@ function Sidebar({ active, onNavigate, open, onClose, taskCount }) {
     <div className="sidebar-spacer" />
     <div className="goal-card"><div className="goal-icon"><Target size={19} /></div><span>Финансовая цель</span><strong>На путешествие</strong><div className="goal-values"><b>68 400 ₽</b><span>из 120 000 ₽</span></div><div className="goal-track"><i /></div><small>57% уже накоплено</small></div>
     <div className="sidebar-bottom"><button onClick={() => onNavigate('settings')}><Settings size={19} />Настройки</button><button onClick={() => onNavigate('help')}><CircleHelp size={19} />Помощь</button></div>
-    <div className="profile"><div className="avatar">АС</div><div><strong>Анна Смирнова</strong><span>Личный аккаунт</span></div><MoreHorizontal size={19} /></div>
   </aside>;
 }
 
@@ -270,7 +269,7 @@ export default function App() {
     {sidebarOpen && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
     <Sidebar active={active} onNavigate={navigate} open={sidebarOpen} onClose={() => setSidebarOpen(false)} taskCount={undoneToday} />
     <main className="main-content" id="page-top">
-      <header className="topbar"><button className="icon-button menu-button" onClick={() => setSidebarOpen(true)} aria-label="Открыть меню"><Menu size={22} /></button><div className="greeting"><span>{fullDate}</span><h1>{greeting}, Анна <span>👋</span></h1><p>Всё важное — в одном месте</p></div><div className="top-actions"><button className="icon-button search-top" onClick={() => navigate('finance')} aria-label="Поиск по расходам"><Search size={20} /></button><div className="notification-wrap"><button className="icon-button notification-button" onClick={() => setNotificationsOpen(!notificationsOpen)} aria-label="Уведомления"><Bell size={20} /><i /></button>{notificationsOpen && <div className="notifications"><strong>Сегодня в плане</strong><p>{undoneToday ? `${undoneToday} ${undoneToday === 1 ? 'задача ждёт' : 'задачи ждут'} выполнения` : 'Все задачи выполнены!'}</p><span>Дневной лимит: {money(Math.max(0, limits.day - spentBetween(expenses, new Date())))} свободно</span></div>}</div><button className="button primary add-expense-top" onClick={() => setModal('expense')}><Plus size={19} />Добавить расход</button></div></header>
+      <header className="topbar"><button className="icon-button menu-button" onClick={() => setSidebarOpen(true)} aria-label="Открыть меню"><Menu size={22} /></button><div className="greeting"><span>{fullDate}</span><h1>{greeting} <span>👋</span></h1><p>Всё важное — в одном месте</p></div><div className="top-actions"><button className="icon-button search-top" onClick={() => navigate('finance')} aria-label="Поиск по расходам"><Search size={20} /></button><div className="notification-wrap"><button className="icon-button notification-button" onClick={() => setNotificationsOpen(!notificationsOpen)} aria-label="Уведомления"><Bell size={20} /><i /></button>{notificationsOpen && <div className="notifications"><strong>Сегодня в плане</strong><p>{undoneToday ? `${undoneToday} ${undoneToday === 1 ? 'задача ждёт' : 'задачи ждут'} выполнения` : 'Все задачи выполнены!'}</p><span>Дневной лимит: {money(Math.max(0, limits.day - spentBetween(expenses, new Date())))} свободно</span></div>}</div><button className="button primary add-expense-top" onClick={() => setModal('expense')}><Plus size={19} />Добавить расход</button></div></header>
       <div className="content-heading"><div><h2>Обзор</h2><p>Следите за бюджетом и выполнением планов</p></div><div className="month-picker"><CalendarDays size={17} />{monthName(new Date())}</div></div>
       <StatCards expenses={expenses} />
       <div className="dashboard-grid"><SpendingChart expenses={expenses} /><LimitsPanel limits={limits} expenses={expenses} onEdit={() => setModal('limits')} /></div>
